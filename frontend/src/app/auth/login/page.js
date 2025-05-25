@@ -31,24 +31,24 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("Processing...");
-    console.log("form data",formData);
-    
+    console.log("form data", formData);
+
 
     try {
-    const response = await axios.post(
-      `http://localhost:5000/api/auth/login`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+      const response = await axios.post(
+        `http://localhost:5000/api/auth/login`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.data.token) {
         setMessage("Login successful!");
         setIsSuccess(true);
-         setFormData({ email: "", password: "" });
+        setFormData({ email: "", password: "" });
         // Save token to localStorage or cookies if needed
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -67,7 +67,7 @@ function LoginPage() {
     }
 
 
-  
+
   };
 
   return (
@@ -77,13 +77,13 @@ function LoginPage() {
           <IoReturnUpBack size={45} color="#F5EEEE" />
         </Link>
         <span>
-          <img src = "/logo.png" className="h-[50px] shadow-xl/30 rounded-full" />
+          <img src="/logo.png" className="h-[50px] shadow-xl/30 rounded-full" />
         </span>
       </span>
-      <div className="border flex flex-col justify-center items-center rounded-lg p-10 min-w-[400px] shadow-lg">
+      <div className="border relative flex flex-col justify-center items-center rounded-lg p-10 min-w-[400px] shadow-lg">
         <h1 className="text-slate-600 font-bold text-3xl mb-6">Login</h1>
 
-        <form className="w-full max-w-sm z-10" onSubmit={handleSubmit}>
+        <form className="w-full  max-w-sm z-10" onSubmit={handleSubmit}>
           {/* Username Field */}
 
           {/* Email Field */}
@@ -125,6 +125,7 @@ function LoginPage() {
           >
             Submit
           </button>
+          {/* <img src="/potatoe.png" className="absolute h-50 left-[50%] -top-[45%] -translate-x-[50%] pointer-events-none" /> */}
         </form>
 
         {/* Display message */}
@@ -136,9 +137,8 @@ function LoginPage() {
         }</p>}
       </div>
       <img src="/dada.png" className="absolute h-50 right-[30%] top-[65%] pointer-events-none" />
-      <img src="/potatoe.png" className="absolute h-50 left-[50%] bottom-[68%] -translate-x-[50%] pointer-events-none" />
       <img src="/thali.png" className="absolute h-30 left-[35%] bottom-[10%] -translate-x-[50%] pointer-events-none" />
-      
+
     </div>
   );
 }
