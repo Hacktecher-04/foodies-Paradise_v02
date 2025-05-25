@@ -1,11 +1,18 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoReturnUpBack } from "react-icons/io5";
 import axios from "axios";
 import { useRouter } from "next/navigation"
 
+
+
+
+
 function LoginPage() {
+
+
+
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
@@ -24,24 +31,27 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("Processing...");
+    console.log("form data",formData);
+    
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    const response = await axios.post(
+      `http://localhost:5000/api/auth/login`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
       if (response.data.token) {
         setMessage("Login successful!");
         setIsSuccess(true);
-
+         setFormData({ email: "", password: "" });
         // Save token to localStorage or cookies if needed
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
 
         // Redirect to home page
         setTimeout(() => {
@@ -55,6 +65,9 @@ function LoginPage() {
       setMessage(error.response?.data?.message || "Login failed!");
       setIsSuccess(false);
     }
+
+
+  
   };
 
   return (

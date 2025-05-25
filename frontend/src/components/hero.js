@@ -5,8 +5,8 @@ const hero = () => {
   return (
     <>
       <div className="w-full h-screen relative bg-[linear-gradient(263deg,#FFC2FF_-8.97%,#FFA4D6_43.93%,#FF8AA6_96.83%)] flex gap-10 flex-col items-center justify-center">
-        <div>
-          <h1 className="text-8xl font-bold text-white">Foodies’ Paradise</h1>
+        <div className="flex flex-col justify-center items-center">
+          <h1 className="text-8xl font-bold text-white">Chefmind</h1>
           <h3 className="text-[#F5EEEE] font-semibold text-4xl text-center">
             AI-Powered Recipes Just for You!
           </h3>

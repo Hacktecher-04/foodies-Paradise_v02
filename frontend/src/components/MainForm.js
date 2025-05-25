@@ -1,52 +1,244 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// "use client";
+// import React, { useState } from "react";
+// import { AiOutlineSend, AiOutlinePlus } from "react-icons/ai";
+// import { ImSpinner2 } from "react-icons/im";
+
+// const MainForm = ({ fetchRecipes }) => {
+//   const [ingredient, setIngredient] = useState("");
+//   const [amount, setAmount] = useState("");
+//   const [ingredientsList, setIngredientsList] = useState([]);
+//   const [loading, setLoading] = useState(false);
+
+//   const handleAddIngredient = (e) => {
+//     e.preventDefault();
+//     if (ingredient.trim() === "" || amount.trim() === "") {
+//       alert("Please enter both ingredient and amount.");
+//       return;
+//     }
+
+//     const newEntry = `${ingredient.trim()} - ${amount.trim()}`;
+//     setIngredientsList([...ingredientsList, newEntry]);
+
+//     setIngredient("");
+//     setAmount("");
+//   };
+
+//   const handleSubmitRecipes = async () => {
+//     if (ingredientsList.length === 0) {
+//       alert("Please add at least one ingredient.");
+//       return;
+//     }
+
+//     setLoading(true);
+//     await fetchRecipes(ingredientsList);
+//     setLoading(false);
+//     setIngredientsList([]);
+//   };
+
+//   return (
+//     <div className="w-full max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-lg space-y-6">
+//       <h2 className="text-xl font-bold text-slate-700">
+//         Smart Recipe Recommender
+//       </h2>
+
+//       {/* Input Form */}
+//       <form
+//         onSubmit={handleAddIngredient}
+//         className="flex flex-col md:flex-row md:items-center gap-3"
+//       >
+//         <input
+//           type="text"
+//           value={ingredient}
+//           onChange={(e) => setIngredient(e.target.value)}
+//           placeholder="Ingredient"
+//           className="flex-1 border border-gray-300 rounded-xl px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-black"
+//         />
+//         <input
+//           type="text"
+//           value={amount}
+//           onChange={(e) => setAmount(e.target.value)}
+//           placeholder="Amount"
+//           className="w-[120px] border border-gray-300 rounded-xl px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-black"
+//         />
+//         <button
+//           type="submit"
+//           className="bg-black  text-white px-3 py-2 rounded-xl text-sm transition duration-150 shadow flex items-center justify-center"
+//         >
+//           <AiOutlinePlus size={18} />
+//         </button>
+//       </form>
+
+//       {/* Ingredients List */}
+//       {ingredientsList.length > 0 && (
+//         <div>
+//           <h3 className="text-slate-600 font-semibold mb-2 text-sm">
+//             Ingredients Added:
+//           </h3>
+//           <ul className="list-disc list-inside space-y-1 text-sm text-gray-800">
+//             {ingredientsList.map((item, index) => (
+//               <li key={index} className="ml-2">
+//                 {item}
+//               </li>
+//             ))}
+//           </ul>
+//         </div>
+//       )}
+
+//       {/* Recommend Button */}
+//       <div className="text-center">
+//         <button
+//           onClick={handleSubmitRecipes}
+//           disabled={loading}
+//           className={`inline-flex items-center gap-2 bg-[#f572af] text-white px-6 py-2 rounded-xl font-medium  transition duration-150 ${
+//             loading ? "opacity-60 cursor-not-allowed" : ""
+//           }`}
+//         >
+//           {loading ? (
+//             <>
+//               <ImSpinner2 className="animate-spin" size={18} />
+//               Recommending...
+//             </>
+//           ) : (
+//             <>
+//               <AiOutlineSend size={18} />
+//               Recommend Recipes
+//             </>
+//           )}
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default MainForm;
+
+
+
+
+
+
 "use client";
 import React, { useState } from "react";
-import { AiOutlineSend } from "react-icons/ai";
+import { AiOutlineSend, AiOutlinePlus } from "react-icons/ai";
+import { ImSpinner2 } from "react-icons/im";
 
 const MainForm = ({ fetchRecipes }) => {
-  const [inputText, setInputText] = useState(""); // Just track the input box
+  const [ingredient, setIngredient] = useState("");
+  const [amount, setAmount] = useState("");
+  const [ingredientsList, setIngredientsList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setInputText(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleAddIngredient = (e) => {
     e.preventDefault();
-    if (inputText.trim() === "") return;
-
-    const ingredientsArray = inputText
-      .split(",")
-      .map((item) => item.trim())
-      .filter((item) => item.length > 0);
-
-    if (ingredientsArray.length === 0) {
-      alert("Please enter at least one valid ingredient.");
+    if (ingredient.trim() === "" || amount.trim() === "") {
+      alert("Please enter both ingredient and amount.");
       return;
     }
 
-    setInputText(""); // clear input box
-    fetchRecipes(ingredientsArray); // no need to store in state
+    const newEntry = `${ingredient.trim()} - ${amount.trim()}`;
+    setIngredientsList([...ingredientsList, newEntry]);
+
+    setIngredient("");
+    setAmount("");
+  };
+
+  const handleSubmitRecipes = async () => {
+    if (ingredientsList.length === 0) {
+      alert("Please add at least one ingredient.");
+      return;
+    }
+
+    setLoading(true);
+    await fetchRecipes(ingredientsList);
+    setLoading(false);
+    setIngredientsList([]);
   };
 
   return (
-    <div className="w-full grow-1 bg-slate-100 flex flex-col px-6">
-      <form onSubmit={handleSubmit} className="flex items-center mt-1 relative">
+    <div className="w-full max-w-lg mx-auto bg-white p-6 mt-6 rounded-2xl shadow-md space-y-6">
+      {/* Input Form */}
+      <form
+        onSubmit={handleAddIngredient}
+        className="flex flex-col sm:flex-row items-center gap-3"
+      >
         <input
-          onChange={handleChange}
-          value={inputText}
           type="text"
-          id="txtSearch"
-          placeholder="Enter ingredients e.g. potato, tomato, chilli etc. ..."
-          className="h-[50px] min-w-[100%] border rounded px-4 py-2"
+          value={ingredient}
+          onChange={(e) => setIngredient(e.target.value)}
+          placeholder="Ingredient"
+          className="flex-1 w-full border border-gray-300 rounded-lg px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+        />
+        <input
+          type="text"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          placeholder="Amount"
+          className="w-[120px] border border-gray-300 rounded-lg px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
         />
         <button
           type="submit"
-          className="w-[40px] h-[40px] absolute pl-1 bg-slate-100 rounded-full flex items-center justify-center right-1 hover:scale-[1.08] cursor-pointer"
+          className="bg-gray-800 text-white px-3 py-2 rounded-lg hover:bg-gray-900 transition duration-150 shadow flex items-center justify-center"
         >
-          <AiOutlineSend size={28} />
+          <AiOutlinePlus size={18} />
         </button>
       </form>
+
+      {/* Ingredients List */}
+      {ingredientsList.length > 0 && (
+        <div>
+          <h3 className="text-gray-700 font-semibold mb-2 text-sm">
+            Ingredients Added:
+          </h3>
+          <ul className="list-disc list-inside space-y-1 text-sm text-gray-800">
+            {ingredientsList.map((item, index) => (
+              <li key={index} className="ml-2">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Recommend Button */}
+      <div className="text-center">
+        <button
+          onClick={handleSubmitRecipes}
+          disabled={loading}
+          className={`inline-flex items-center gap-2 bg-[#f572af] text-white px-6 py-2 rounded-lg font-medium transition duration-150 ${
+            loading ? "opacity-60 cursor-not-allowed" : "hover:bg-pink-600"
+          }`}
+        >
+          {loading ? (
+            <>
+              <ImSpinner2 className="animate-spin" size={18} />
+              Recommending...
+            </>
+          ) : (
+            <>
+              <AiOutlineSend size={18} />
+              Recommend Recipes
+            </>
+          )}
+        </button>
+      </div>
     </div>
   );
 };
 
 export default MainForm;
+
+

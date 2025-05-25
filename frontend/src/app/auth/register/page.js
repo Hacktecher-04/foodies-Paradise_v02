@@ -24,12 +24,12 @@ const RegisterPage = () => {
     setMessage("Processing...");
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`, formData, {
+      const response = await axios.post(`http://localhost:5000/api/auth/register`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-
+      setFormData({ userName: "", email: "", password: "" });
       setMessage(response.data.message || "Registration successful!");
     } catch (error) {
       setMessage(error.response?.data?.message || "Registration failed!");

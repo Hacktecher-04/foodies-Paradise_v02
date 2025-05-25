@@ -13,10 +13,22 @@ const HomePage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
+   const [user, setUser] = useState(null);
+  
+    useEffect(() => {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }, []);
+
   const fetchRecipes = async (ingredients) => {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/recipe/recommendation`, { ingredients }); // Use environment variable for API URL
+      const userId = user?.id;
+      const response = await axios.post(`http://localhost:5000/api/recipe/recommendation`, { ingredients, userId}); // Use environment variable for API URL
       setRecipeData(response.data);
+      console.log("response",response.data);
+      
     } catch (err) {
       setError("Failed to fetch recipes. Please try again.");
     } finally {
@@ -26,7 +38,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
-    if (token) {
+    if (token) {  //token
       setIsAuthenticated(true);
     } else {
       router.push("/auth/login"); // Redirect to login page if not authenticated
@@ -40,12 +52,13 @@ const HomePage = () => {
   return (
     <div className="h-[100vh]">
       <Navbar />
-      <div className="w-full flex bg-gray-100">
-        <div className="h-[90vh] w-full bg-slate-100 flex flex-col">
+      <div className="w-full flex ">
+        {" "}
+        <div className="h-[90vh] w-full  flex flex-col">
           <div className="h-[90%] w-full flex flex-wrap justify-center items-center gap-4 p-4 sm:p-2">
             <RecipeCard recipe={recipeData} />
           </div>
-          <div className="w-full bg-slate-100 flex justify-center max-h-[10%] p-2 sm:p-1">
+          <div className="w-full  flex justify-center ">
             <MainForm fetchRecipes={fetchRecipes} />
           </div>
         </div>

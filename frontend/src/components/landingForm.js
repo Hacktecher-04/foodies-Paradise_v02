@@ -30,6 +30,7 @@ const LandingForm = () => {
                         <p className='text-xl text-slate-500'>search your recipe here:</p>
                         <form className='flex items-center mt-1 relative' onSubmit={handleSubmit}>
                             <input
+                            disabled={true}
                                 type="text"
                                 id="txtSearch"
                                 placeholder="Jaisa Mood, Vaisa Food..."

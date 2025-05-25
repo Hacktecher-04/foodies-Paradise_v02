@@ -80,11 +80,18 @@ const loginUser = async (req, res) => {
       { expiresIn: "24hr" }
     );
 
-    res.cookie("token", token).json({
-      success: true,
-      message: "Login successfully!",
-      token,
-    });
+   res.cookie("token", token).json({
+     success: true,
+     message: "Login successfully!",
+     token,
+     user: {
+       id: user._id,
+       name: user.userName,
+       email: user.email,
+      
+     },
+   });
+
   } catch (error) {
     res.status(500).json({
       success: false,

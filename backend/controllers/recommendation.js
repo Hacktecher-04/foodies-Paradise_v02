@@ -5,8 +5,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const getRecommendation = async (req, res) => {
+     
     try {
-        const { ingredients } = req.body;
+        const { ingredients ,userId} = req.body;
+        // const userId = "681101ccd6aa3500d95ce774";
 
         // Validate input
         if (!Array.isArray(ingredients) || ingredients.length === 0) {
@@ -29,20 +31,23 @@ const getRecommendation = async (req, res) => {
 
         let prompt;
         if (isVegetableOrFruit) {
-            prompt = `I have these vegetables or fruits: ${ingredients.join(', ')}. Suggest only one recipe with:
+            prompt = `I have these vegetables or fruits: ${ingredients.join(
+              ", "
+            )}. Suggest only one recipe and easy that can made in home  with:
                - Recipe name (short and clear without any special characters and give only name)
                - Brief list of ingredients (comma-separated, max 5 items)
-               - Cooking instructions
+               - Cooking instructions(in para form) 
                - Estimated cooking time (in minutes)
                - Health score (1-100 and not give ideas about score)
             `;
         } else {
-            prompt = `I have these ingredients: ${ingredients.join(', ')}. Suggest only one recipe with:
+            prompt = `I have these ingredients: ${ingredients.join(', ')}. Suggest only one recipe and easy that can made in home  with:
                - Recipe name (short and clear without any special characters and give only name)
                - Brief list of ingredients (comma-separated, max 5 items)
-               - Cooking instructions
+               - Cooking instructions(in para form)
                - Estimated cooking time (in minutes)
                - Health score (1-100 and not give ideas about score)
+               without start character
             `;
         }
 
@@ -77,7 +82,8 @@ const getRecommendation = async (req, res) => {
             ingredients: ingredientsList,
             instructions,
             cookingTime,
-            healthScore: validHealthScore
+            healthScore: validHealthScore,
+            userId
         });
 
         await newRecipe.save();
@@ -96,4 +102,24 @@ const getRecommendation = async (req, res) => {
     }
 };
 
-module.exports = { getRecommendation };
+const getHistory = async (req,res)=>{
+    const {userId} = req.params;
+  try{
+    const history = await Recipe.find({userId});
+    if(!history || history.length===0){
+        return res.status(404).json({
+            message:"No history found"
+        })
+    }
+    res.status(200).json(history);
+  }
+  catch(err){
+    console.log(err);
+     res.status(500).json({
+        message:"Server error"
+     });
+    
+  }
+}
+
+module.exports = { getRecommendation ,getHistory};
