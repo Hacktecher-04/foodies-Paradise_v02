@@ -55,7 +55,7 @@ function LoginPage() {
 
         // Redirect to home page
         setTimeout(() => {
-          router.push("/home");
+          router.push("/auth/home");
         }, 1000);
       } else {
         setMessage("Login failed! Token not received.");
