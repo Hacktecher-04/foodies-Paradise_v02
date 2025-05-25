@@ -37,7 +37,7 @@ const getRecommendation = async (req, res) => {
                - Recipe name (short and clear without any special characters and give only name)
                - Brief list of ingredients (comma-separated, max 5 items)
                - Cooking instructions(in para form) 
-               - Estimated cooking time (in minutes)
+               - Estimated cooking time (in minutes, give a number not text)
                - Health score (1-100 and not give ideas about score)
             `;
         } else {
@@ -45,7 +45,7 @@ const getRecommendation = async (req, res) => {
                - Recipe name (short and clear without any special characters and give only name)
                - Brief list of ingredients (comma-separated, max 5 items)
                - Cooking instructions(in para form)
-               - Estimated cooking time (in minutes)
+               - Estimated cooking time (in minutes, give a number not text)
                - Health score (1-100 and not give ideas about score)
                without start character
             `;
@@ -68,8 +68,8 @@ const getRecommendation = async (req, res) => {
 
         // Extract cooking time from the whole text
         const regex = /(\d+)\s*(?:minutes|min)/i;
-        const cookingTimeMatch = generatedText.match(regex);
-        const cookingTime = cookingTimeMatch ? cookingTimeMatch[1] : "N/A";
+        const cookingTimeLine = result[3]?.trim();
+        const cookingTime = /^\d+$/.test(cookingTimeLine) ? cookingTimeLine : "N/A";
 
         // Remove cooking time from instructions if it’s mistakenly included
         instructions = instructions.replace(regex, "").trim();

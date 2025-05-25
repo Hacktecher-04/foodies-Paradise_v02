@@ -15,13 +15,13 @@ const LandingForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.push("/home");
+        router.push("/auth/home");
     };
 
     return (
         <>
-            <div className='w-full relative h-[100vh] bg-white flex flex-col'>
-                <h1 className='text-center text-7xl font-semibold absolute top-[15%] left-[50%] -translate-x-[50%]'>Kuchh Banaoge Kya? </h1>
+            <div className='w-full relative h-[100vh] bg-white flex flex-col justify-center'>
+                <h1 className='text-center text-7xl font-semibold absolute top-[8%] left-[50%] -translate-x-[50%]'>Kuchh Banaoge Kya? </h1>
                 <div className='w-full h-[23.34%] flex items-start justify-end px-15'>
                     <img src="food1.png" className='h-[300px] -rotate-10' alt="Food 1" />
                 </div>
@@ -31,6 +31,7 @@ const LandingForm = () => {
                         <form className='flex items-center mt-1 relative' onSubmit={handleSubmit}>
                             <input
                             disabled={true}
+                                title='disbled'
                                 type="text"
                                 id="txtSearch"
                                 placeholder="Jaisa Mood, Vaisa Food..."

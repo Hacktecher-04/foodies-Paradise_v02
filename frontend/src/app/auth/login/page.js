@@ -71,16 +71,19 @@ function LoginPage() {
   };
 
   return (
-    <div className="w-full relative h-screen flex justify-center items-center bg-slate-200 p-10">
-      <span className="absolute top-5 left-10 hover:scale-[1.1]">
-        <Link href="/">
-          <IoReturnUpBack size={45} />
+    <div className="w-full relative h-screen relative flex justify-center items-center bg-gradient-to-br from-rose-500 via-slate-100 to-pink-500 p-10">
+      <span className="absolute top-5 flex gap-4 left-10 ">
+        <Link href="/" className="hover:scale-[1.1]">
+          <IoReturnUpBack size={45} color="#F5EEEE" />
         </Link>
+        <span>
+          <img src = "/logo.png" className="h-[50px] shadow-xl/30 rounded-full" />
+        </span>
       </span>
       <div className="border flex flex-col justify-center items-center rounded-lg p-10 min-w-[400px] shadow-lg">
         <h1 className="text-slate-600 font-bold text-3xl mb-6">Login</h1>
 
-        <form className="w-full max-w-sm" onSubmit={handleSubmit}>
+        <form className="w-full max-w-sm z-10" onSubmit={handleSubmit}>
           {/* Username Field */}
 
           {/* Email Field */}
@@ -93,7 +96,7 @@ function LoginPage() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
               placeholder="Enter Your Email"
               required
             />
@@ -109,7 +112,7 @@ function LoginPage() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
               placeholder="Enter Your Password"
               required
             />
@@ -118,7 +121,7 @@ function LoginPage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+            className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition"
           >
             Submit
           </button>
@@ -132,6 +135,10 @@ function LoginPage() {
           </span>
         }</p>}
       </div>
+      <img src="/dada.png" className="absolute h-50 right-[30%] top-[65%] pointer-events-none" />
+      <img src="/potatoe.png" className="absolute h-50 left-[50%] bottom-[68%] -translate-x-[50%] pointer-events-none" />
+      <img src="/thali.png" className="absolute h-30 left-[35%] bottom-[10%] -translate-x-[50%] pointer-events-none" />
+      
     </div>
   );
 }

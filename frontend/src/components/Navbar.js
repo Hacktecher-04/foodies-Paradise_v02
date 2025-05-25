@@ -194,7 +194,7 @@ const fetchHistory = async () => {
   return (
     <>
       <div className="w-full flex justify-between items-center py-3 px-5 bg-[#f572af] relative">
-        <h1 className="font-bold text-2xl text-white">Chefmind</h1>
+        <h1 className="font-bold text-2xl text-white">Foodies' Paradise</h1>
         <div className="relative" ref={dropdownRef}>
           <div
             className="p-2 rounded-full border-2 border-white cursor-pointer"

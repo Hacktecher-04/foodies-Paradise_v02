@@ -4,11 +4,12 @@ import axios from "axios";
 import Navbar from "@/components/Navbar";
 import MainForm from "@/components/MainForm";
 import RecipeCard from "@/components/RecipeCard";
+import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
 
 const HomePage = () => {
   const [recipeData, setRecipeData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
@@ -23,6 +24,7 @@ const HomePage = () => {
     }, []);
 
   const fetchRecipes = async (ingredients) => {
+    setLoading(true);
     try {
       const userId = user?.id;
       const response = await axios.post(`http://localhost:5000/api/recipe/recommendation`, { ingredients, userId}); // Use environment variable for API URL
@@ -56,7 +58,8 @@ const HomePage = () => {
         {" "}
         <div className="h-[90vh] w-full  flex flex-col">
           <div className="h-[90%] w-full flex flex-wrap justify-center items-center gap-4 p-4 sm:p-2">
-            <RecipeCard recipe={recipeData} />
+             {loading ? <Loader /> : <RecipeCard recipe={recipeData} />}
+
           </div>
           <div className="w-full  flex justify-center ">
             <MainForm fetchRecipes={fetchRecipes} />

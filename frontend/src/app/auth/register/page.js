@@ -37,7 +37,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="w-full relative h-screen flex justify-center items-center bg-slate-200 p-10">
+    <div className="w-full relative h-screen flex justify-center items-center bg-gradient-to-bl from-rose-500 via-slate-100 to-pink-500 p-10">
       <span className="absolute top-5 left-10 hover:scale-[1.1]">
         <Link href="/">
           <IoReturnUpBack size={45} />
