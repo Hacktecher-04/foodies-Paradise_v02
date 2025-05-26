@@ -21,8 +21,8 @@ const LandingForm = () => {
     return (
         <>
             <div className='w-full relative h-[100vh] bg-white flex flex-col justify-center'>
-                <h1 className='text-center text-7xl font-semibold absolute top-[8%] left-[50%] -translate-x-[50%]'>Kuchh Banaoge Kya? </h1>
-                <div className='w-full h-[23.34%] flex items-start justify-end px-15'>
+                <h1 className='text-center text-8xl font-semibold absolute top-[7%] left-[50%] -translate-x-[50%]'>Kuchh Banaoge Kya? </h1>
+                <div className='w-full h-[23.34%] flex items-start justify-end px-30 pt-5'>
                     <img src="food1.png" className='h-[300px] -rotate-10' alt="Food 1" />
                 </div>
                 <div className='w-full h-1/3 flex flex-col items-center justify-center'>
@@ -48,8 +48,8 @@ const LandingForm = () => {
                         </form>
                     </div>
                 </div>
-                <div className='w-full h-1/3 flex px-15 items-end justify-start'>
-                    <img src="food2.png" className='h-[300px]' alt="Food 2" />
+                <div className='w-full h-1/3 flex px-50 pb-15 items-end justify-start'>
+                    <img src="food2.png" className='h-[250px]' alt="Food 2" />
                 </div>
             </div>
         </>
